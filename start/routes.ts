@@ -22,4 +22,16 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', async ({ view }) => {
   return view.render('index')
-})
+}).as("index")
+
+Route.get('/shop', async ({ view }) => {
+  return view.render('shop')
+}).as("shop")
+
+Route.get('/cadastro', async ({ view }) => {
+  return view.render('signup')
+}).as("signup")
+
+Route.get('/login', async ({ view }) => {
+  return view.render('login')
+}).as("login")
