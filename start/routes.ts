@@ -16,7 +16,7 @@
 | import './routes/cart'
 | import './routes/customer''
 |
-*/
+*/ 
 
 import Route from '@ioc:Adonis/Core/Route'
 
@@ -24,14 +24,19 @@ Route.get('/', async ({ view }) => {
   return view.render('index')
 }).as("index")
 
-Route.get('/shop', async ({ view }) => {
+Route.get('/shop', async ({ view, auth }) => {
+  await auth.use('web').check();
+  console.log(auth.use('web').user);
+  
   return view.render('shop')
 }).as("shop")
 
-Route.get('/cadastro', async ({ view }) => {
-  return view.render('signup')
-}).as("signup")
+Route.get('/cadastro', "UserController.signupPage").as("signupView")
+Route.post('/signup', "UserController.signup").as("signup")
 
-Route.get('/login', async ({ view }) => {
-  return view.render('login')
-}).as("login")
+Route.get('/login', "UserController.loginPage").as("loginView")
+Route.post('/login', "UserController.login").as("login")
+
+Route.get('/logout', "UserController.logout").as("logout")
+
+Route.get('/profile', "UserController.profile").as("profile")

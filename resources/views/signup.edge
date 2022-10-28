@@ -3,17 +3,16 @@
 @section('content')
 <section class="class spad">
   <div class="container">
-      <div class="row">
+      <div class="row">  
           <div class="col-lg-6">
               <div class="class__form">
                   <div class="section-title">
                       <span>Cadastre-se</span>
-                      <h2>Prove o melhor <br />de todos os bolos</h2>
                   </div>
-                  <form action="#">
-                      <input type="text" placeholder="Nome" name="name">
-                      <input type="email" placeholder="E-mail" name="email">
-                      <input type="password" placeholder="Senha">
+                  <form action="{{ route('signup') }}" method="POST">
+                      <input type="text" placeholder="Nome" name="name" required>
+                      <input type="email" placeholder="E-mail" name="email" required>
+                      <input type="password" placeholder="Senha" name="password" required>
                       <button type="submit" class="site-btn">Cadastrar</button>
                   </form>
               </div>
