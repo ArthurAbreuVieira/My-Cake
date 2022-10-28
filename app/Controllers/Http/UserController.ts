@@ -42,16 +42,42 @@ export default class UserController {
     return isLoggedIn;
   }
 
-  public async logout({ auth, response }) {
+  public async logout({ auth, response }: HttpContextContract) {
     await auth.logout();
 
     response.redirect().toRoute("index");
   }
 
-  public async profile({ response, auth, view }) {
+  public async profile({ response, auth, view }: HttpContextContract) {
     if(!await this.checkLogin(auth)) 
       return response.redirect().toRoute("index");
 
     return view.render("profile");
+  }
+
+  public async sellers({ response, auth, view }: HttpContextContract) {
+    if(!await this.checkLogin(auth)) return response.redirect().toRoute("loginView");
+    if(auth.use('web').user?.role !== "admin") return response.redirect().toRoute("loginView");
+
+    const sellers = await User.query().where('role', 'seller');
+
+    return view.render("sellers", {sellers});
+  }
+
+  public async registerSellerView({ response, auth, view }: HttpContextContract) {
+    if(!await this.checkLogin(auth)) return response.redirect().toRoute("loginView");
+    if(auth.use('web').user.role !== "admin") return response.redirect().toRoute("loginView");
+
+    return view.render("registerSeller");
+  }
+
+  public async registerSeller({ request, response, auth, view }: HttpContextContract) {
+    const { name, email, password } = request.only(['name', 'email', 'password']);
+
+    const seller = await User.create({
+      name, email, password, role: "seller"
+    });
+
+    return response.redirect().toRoute("sellers");
   }
 }
