@@ -26,7 +26,7 @@
                             <thead>
                                 <tr>
                                     <th>Vendedor</th>
-                                    <th><a href="#" class="primary-btn">Cadastrar vendedor</a></th>
+                                    <th><a href="{{ route('registerSellerView') }}" class="primary-btn">Cadastrar vendedor</a></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -38,8 +38,8 @@
                                     </div>
                                   </td>
                                   <td class="cart__btn" align="right">
-                                    <a href="#" class="btn btn-warning px-4" >Editar</a>
-                                    <a href="#" class="btn btn-danger px-3 mx-4">Remover</a>
+                                    <a href="{{ route('updateSellerView', [seller.id]) }}" class="btn btn-warning px-4" >Editar</a>
+                                    <a href="{{ route('deleteSeller', [seller.id]) }}" class="btn btn-danger px-3 mx-4">Remover</a>
                                   </td>
                                 </tr>
                                 @endeach                                

@@ -36,11 +36,14 @@ Route.post('/signup', "UserController.signup").as("signup")
 
 Route.get('/login', "UserController.loginPage").as("loginView")
 Route.post('/login', "UserController.login").as("login")
-
 Route.get('/logout', "UserController.logout").as("logout")
-
-Route.get('/profile', "UserController.profile").as("profile")
+Route.get('/perfil', "UserController.profile").as("profile")
+Route.get('/perfil/atualizar', "UserController.updateUserView").as("updateUserView")
+Route.post('/updateUser', "UserController.updateUser").as("updateUser")
 
 Route.get('/vendedores', "UserController.sellers").as("sellers");
 Route.get('/cadastro/vendedor', "UserController.registerSellerView").as("registerSellerView");
 Route.post('/registerSeller', "UserController.registerSeller").as("registerSeller");
+Route.get('/vendedor/:id', "UserController.updateSellerView").as("updateSellerView");
+Route.post('/updateSeller', "UserController.updateSeller").as("updateSeller");
+Route.get('/delete/:id', "UserController.deleteSeller").as("deleteSeller");

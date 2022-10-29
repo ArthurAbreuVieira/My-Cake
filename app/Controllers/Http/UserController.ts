@@ -50,7 +50,7 @@ export default class UserController {
 
   public async profile({ response, auth, view }: HttpContextContract) {
     if(!await this.checkLogin(auth)) 
-      return response.redirect().toRoute("index");
+      return response.redirect().toRoute("loginView");
 
     return view.render("profile");
   }
@@ -66,7 +66,7 @@ export default class UserController {
 
   public async registerSellerView({ response, auth, view }: HttpContextContract) {
     if(!await this.checkLogin(auth)) return response.redirect().toRoute("loginView");
-    if(auth.use('web').user.role !== "admin") return response.redirect().toRoute("loginView");
+    if(auth.use('web').user?.role !== "admin") return response.redirect().toRoute("loginView");
 
     return view.render("registerSeller");
   }
@@ -74,10 +74,81 @@ export default class UserController {
   public async registerSeller({ request, response, auth, view }: HttpContextContract) {
     const { name, email, password } = request.only(['name', 'email', 'password']);
 
+    const password_hash = await Hash.make(password);    
+
     const seller = await User.create({
-      name, email, password, role: "seller"
+      name, email, password:password_hash, role: "seller"
     });
 
     return response.redirect().toRoute("sellers");
+  }
+
+  public async updateSellerView({ params, response, auth, view }: HttpContextContract) {
+    if(!await this.checkLogin(auth)) return response.redirect().toRoute("loginView");
+    if(auth.use('web').user?.role !== "admin") return response.redirect().toRoute("loginView");
+
+    const sellerId = params.id;
+    const seller = await User.find(sellerId);    
+
+    if(!seller) return response.redirect().toRoute("sellers");
+
+    return view.render("updateSeller", { seller });
+  }
+
+  public async updateSeller({ request, response, auth, view }: HttpContextContract) {
+    if(!await this.checkLogin(auth)) return response.redirect().toRoute("loginView");
+    if(auth.use('web').user?.role !== "admin") return response.redirect().toRoute("loginView");
+
+    const { id, name, email, password} = request.only(['id', 'name', 'email', 'password']);
+    const seller = await User.find(id);    
+
+    if(!seller) return response.redirect().toRoute("sellers");
+
+    seller.name = name;
+    seller.email = email;
+    seller.password = await Hash.make(password);
+
+    await seller.save();
+
+    return response.redirect().toRoute('sellers');
+  }
+
+  public async deleteSeller({ params, response, auth, view }: HttpContextContract) {
+    if(!await this.checkLogin(auth)) return response.redirect().toRoute("loginView");
+    if(auth.use('web').user?.role !== "admin") return response.redirect().toRoute("loginView");
+
+    const sellerId = params.id;
+    const seller = await User.find(sellerId);    
+
+    if(!seller) return response.redirect().toRoute("sellers");
+
+    seller.delete();
+
+    return response.redirect().toRoute('sellers');
+  }
+    
+  public async updateUserView({ params, response, auth, view }: HttpContextContract) {
+    if(!await this.checkLogin(auth)) return response.redirect().toRoute("loginView");
+
+    return view.render('updateUser');
+  }
+    
+  public async updateUser({ request, response, auth, view }: HttpContextContract) {
+    if(!await this.checkLogin(auth)) return response.redirect().toRoute("loginView");
+
+    const id = auth.use('web').user?.id;
+    const user = await User.find(id); 
+    
+    if(!user) return response.redirect().toRoute("profile");
+
+    const { name, email, password } = request.only(['name','email','password']);
+
+    user.name = name;
+    user.email = email;
+    user.password = await Hash.make(password);
+    
+    user.save();
+
+    return response.redirect().toRoute('profile');
   }
 }

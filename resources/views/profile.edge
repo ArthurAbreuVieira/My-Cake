@@ -23,10 +23,11 @@
                     <div class="product__details__text">
                         <div class="product__label my-2">Dados pessoais</div>
                         <ul>
-                            <li>Nome: <span>Arthur Abreu Vieira Mendes</span></li>
-                            <li>E-mail: <span>Arthur@email</span></li>
+                            <li>Nome: <span>{{auth.user.name}}</span></li>
+                            <li>E-mail: <span>{{auth.user.email}}</span></li>
                             <li>CPF: <span>091.000.000-00</span></li>
-                            <li>Tipo de perfil: <span>Cliente</span></li>
+                            <li>Tipo de perfil: <span>{{auth.user.role=='admin'?'Administrador':auth.user.role=='seller'?'Vendedor':'Cliente'}}</span></li>
+                            <li><a href="{{ route('updateUserView') }}" class="btn btn-primary">Atualizar dados pessoais</a></li>
                         </ul>
                     </div>
                     <div class="product__details__text">

@@ -1,0 +1,28 @@
+@layout('layouts/base')
+
+@section('content')
+<section class="class spad">
+  <div class="container">
+      <div class="row">  
+          <div class="col-lg-6">
+              <div class="class__form">
+                  <div class="section-title">
+                      <span>Atualizar dados</span>
+                      <h2>Atualização de dados do Vendedor</h2>
+                  </div>
+                  <form action="{{ route('updateSeller') }}" method="POST">
+                      <input type="hidden" name="id" value="{{seller.id}}"/>
+                      <input type="text" placeholder="Nome do vendedor" name="name" value='{{seller.name}}' required>
+                      <input type="email" placeholder="E-mail do vendedor" name="email" value='{{seller.email}}' required>
+                      <input type="password" placeholder="Senha" name="password" required>
+                      <button type="submit" class="site-btn">Salvar</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+      <div class="class__video set-bg" data-setbg="/img/class-video.jpg" style="margin-top: 50px">
+      </div>
+  </div>
+</section>
+<!-- Class Section End -->  
+@endsection
