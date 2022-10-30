@@ -1,7 +1,7 @@
 @layout('layouts/base')
 
 @section('content')
-<section class="class spad">
+<section class="class spad" style="min-height:720px;padding-top:50px">
   <div class="container">
       <div class="row">  
           <div class="col-lg-6">
@@ -12,8 +12,13 @@
                   </div>
                   <form action="{{ route('updateSeller') }}" method="POST">
                       <input type="hidden" name="id" value="{{seller.id}}"/>
+                      <label>Nome:</label>
                       <input type="text" placeholder="Nome do vendedor" name="name" value='{{seller.name}}' required>
+                      <label>CPF:</label>
+                      <input type="text" placeholder="CPF do vendedor" name="cpf" required value="{{seller.cpf}}">
+                      <label>E-mail:</label>
                       <input type="email" placeholder="E-mail do vendedor" name="email" value='{{seller.email}}' required>
+                      <label>Senha:</label>
                       <input type="password" placeholder="Senha" name="password" required>
                       <button type="submit" class="site-btn">Salvar</button>
                   </form>

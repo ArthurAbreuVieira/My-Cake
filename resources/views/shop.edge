@@ -17,7 +17,7 @@
 
     @if(auth.user && auth.user.role === 'seller')
     <div class="container mt-5">
-      <a href="#" class="primary-btn btn">Cadastrar produto</a>
+      <a href="{{ route('registerProductView') }}" class="primary-btn btn">Cadastrar produto</a>
     </div>
     @endif
 
@@ -25,6 +25,25 @@
     <section class="shop spad">
         <div class="container">
             <div class="row">
+              @each(product in products)
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                  <div class="product__item">
+                      <div class="product__item__pic set-bg" data-setbg="img/shop/product-{{product.id%12}}.jpg">
+                          <div class="product__label">
+                              <span>Cupcake</span>
+                          </div>
+                      </div>
+                      <div class="product__item__text">
+                          <h6><a href="{{ route('productDetails', [product.id]) }}">{{product.name}}</a></h6>
+                          <div class="product__item__price">R$ {{product.value}}</div>
+                          <div class="cart_add">
+                              <a href="{{ route('productDetails', [product.id]) }}">Ver Mais</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              @endeach
+              {{--
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="product__item">
                         <div class="product__item__pic set-bg" data-setbg="img/shop/product-1.jpg">
@@ -217,6 +236,7 @@
                         </div>
                     </div>
                 </div>
+              --}}
             </div>
         </div>
     </section>

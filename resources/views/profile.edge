@@ -11,10 +11,12 @@
                     </div>
                 </div>
             </div>
+            <br>
+            <a href="{{route('orders')}}" style="color:#f08632;font-weight:bold">Ver meu pedidos</a>
         </div>
     </div>
     <!-- Breadcrumb End -->
-
+    
     <!-- Shop Details Section Begin -->
     <section class="product-details spad">
         <div class="container">
@@ -25,7 +27,7 @@
                         <ul>
                             <li>Nome: <span>{{auth.user.name}}</span></li>
                             <li>E-mail: <span>{{auth.user.email}}</span></li>
-                            <li>CPF: <span>091.000.000-00</span></li>
+                            <li>CPF: <span>{{auth.user.cpf}}</span></li>
                             <li>Tipo de perfil: <span>{{auth.user.role=='admin'?'Administrador':auth.user.role=='seller'?'Vendedor':'Cliente'}}</span></li>
                             <li><a href="{{ route('updateUserView') }}" class="btn btn-primary">Atualizar dados pessoais</a></li>
                         </ul>

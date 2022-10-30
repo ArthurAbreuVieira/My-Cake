@@ -12,6 +12,7 @@
                   </div>
                   <form action="{{ route('registerSeller') }}" method="POST">
                       <input type="text" placeholder="Nome do vendedor" name="name" required>
+                      <input type="text" placeholder="CPF do vendedor" name="cpf" required>
                       <input type="email" placeholder="E-mail do vendedor" name="email" required>
                       <input type="password" placeholder="Senha" name="password" required>
                       <button type="submit" class="site-btn">Cadastrar Vendedor</button>

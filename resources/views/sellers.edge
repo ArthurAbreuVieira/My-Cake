@@ -22,6 +22,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="wishlist__cart__table">
+                      @if(sellers[0])
                         <table class="table-hover">
                             <thead>
                                 <tr>
@@ -45,6 +46,10 @@
                                 @endeach                                
                             </tbody>
                         </table>
+                        @else
+                          <p>Não existem vendedores cadastrados</p>
+                          <a href="{{ route('registerSellerView') }}" class="primary-btn">Cadastrar vendedor</a>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -26,6 +26,12 @@
     <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+    <style>
+      input {
+        border:1px solid #0002 !important;
+      }
+    </style>
 </head>
 
 <body>
@@ -71,16 +77,18 @@
                 <div class="col-lg-12">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            <li class="active"><a href="{{ route('index') }}">Home</a></li>
-                            <li><a href="./about.html">About</a></li>
-                            <li><a href="{{ route('shop') }}">Produtos</a></li>
+                            <li><a href="{{ route('index') }}">Home</a></li>
+                            <li><a href="{{ route('shop') }}">Loja</a></li>
                             </li>
-                            <li><a href="./blog.html">Blog</a></li>
+                            @if(await auth.use('web').check() && auth.user.role != 'customer')
+                            <li><a href="{{route('products')}}">Anuncios</a></li>
+                            @endif
                             @if(await auth.use('web').check() && auth.user.role == 'admin')
                               <li><a href="{{ route('sellers') }}">Vendedores</a></li>
                             @endif
                             {{-- <li><a href="./contact.html">Contact</a><li> --}}
                             <li><a href="{{ route('profile') }}">Perfil</a>
+                            <li><a href="{{ route('orders') }}">Pedidos</a>
                         </ul>
                     </nav>
                 </div>

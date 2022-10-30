@@ -10,11 +10,18 @@
                       <span>Cadastre-se</span>
                   </div>
                   <form action="{{ route('signup') }}" method="POST">
+                      <label>Nome:</label>
                       <input type="text" placeholder="Nome" name="name" required>
+                      <label>CPF:</label>
+                      <input type="text" placeholder="CPF" name="cpf" required>
+                      <label>E-mail:</label>
                       <input type="email" placeholder="E-mail" name="email" required>
+                      <label>Password:</label>
                       <input type="password" placeholder="Senha" name="password" required>
                       <button type="submit" class="site-btn">Cadastrar</button>
                   </form>
+                  <br>
+                  Já tem uma conta? <a href="{{route('loginView')}}" style="color:#f08632;font-weight:bold">Fazer Login</a>
               </div>
           </div>
       </div>

@@ -24,12 +24,7 @@ Route.get('/', async ({ view }) => {
   return view.render('index')
 }).as("index")
 
-Route.get('/shop', async ({ view, auth }) => {
-  await auth.use('web').check();
-  console.log(auth.use('web').user);
-  
-  return view.render('shop')
-}).as("shop")
+
 
 Route.get('/cadastro', "UserController.signupPage").as("signupView")
 Route.post('/signup', "UserController.signup").as("signup")
@@ -47,3 +42,18 @@ Route.post('/registerSeller', "UserController.registerSeller").as("registerSelle
 Route.get('/vendedor/:id', "UserController.updateSellerView").as("updateSellerView");
 Route.post('/updateSeller', "UserController.updateSeller").as("updateSeller");
 Route.get('/delete/:id', "UserController.deleteSeller").as("deleteSeller");
+
+Route.get('/cadastro/produto', "ProductController.registerProductView").as("registerProductView");
+Route.post('/registerProduct', "ProductController.registerProduct").as("registerProduct");
+Route.get('/produtos', "ProductController.products").as("products");
+Route.get('/produto/atualizar/:id', "ProductController.updateProductView").as("updateProductView");
+Route.post('/updateProduct', "ProductController.updateProduct").as("updateProduct");
+Route.get('/shop', "ProductController.shop").as("shop")
+Route.get('/produto/:id', "ProductController.productDetails").as("productDetails")
+Route.get('/checkout', "ProductController.checkout").as("checkout")
+
+Route.post('/createOrder', "OrderController.createOrder").as("createOrder")
+Route.get('/meus-pedidos', "OrderController.userOrders").as("orders")
+Route.get('/pedido/:id', "OrderController.orderView").as("orderView")
+
+

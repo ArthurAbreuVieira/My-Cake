@@ -10,8 +10,13 @@
                       <span>Atualizar dados</span>
                   </div>
                   <form action="{{ route('updateUser') }}" method="POST">
+                      <label>Nome:</label>
                       <input type="text" placeholder="Nome do vendedor" name="name" value='{{auth.user.name}}' required>
+                      <label>CPF:</label>
+                      <input type="text" placeholder="CPF" name="cpf" required value="{{auth.user.cpf}}">
+                      <label>Email:</label>
                       <input type="email" placeholder="E-mail do vendedor" name="email" value='{{auth.user.email}}' required>
+                      <label>Senha:</label>
                       <input type="password" placeholder="Senha" name="password" required>
                       <button type="submit" class="site-btn">Salvar</button>
                   </form>
