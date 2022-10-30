@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import Product from './Product'
+import Card from './Card'
 
 export default class Order extends BaseModel {
   @column({ isPrimary: true })
@@ -11,6 +12,9 @@ export default class Order extends BaseModel {
 
   @column()
   public product_id: number
+
+  @column()
+  public card_id: number
 
   @column()
   public address: string
@@ -25,4 +29,10 @@ export default class Order extends BaseModel {
     foreignKey: 'product_id'
   })
   public product: BelongsTo<typeof Product>
+  
+  @belongsTo(() => Card, {
+    foreignKey: 'card_id'
+  })
+  public card: BelongsTo<typeof Card>
+  
 }

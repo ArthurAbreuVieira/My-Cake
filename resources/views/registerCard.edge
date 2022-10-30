@@ -1,0 +1,33 @@
+@layout('layouts/base')
+
+@section('content')
+<section class="class spad" style="min-height:800px;padding-top:50px">
+  <div class="container">
+      <div class="row">  
+          <div class="col-lg-6">
+              <div class="class__form">
+                  <div class="section-title">
+                      <span>Cadastro</span>
+                      <h2>Cadastrar cartão</h2>
+                  </div>
+                  <form action="{{ route('registerCard') }}" method="POST">
+                      <label>Titular:</label>
+                      <input type="text" name="holder" required>
+                      <label>Apelilo do cartão:</label>
+                      <input type="text" name="name" required>
+                      <label>Número do cartão:</label>
+                      <input type="text" name="number" required>
+                      <label>CVV / CVC:</label>
+                      <input type="text" name="cvc" maxlength="3" required>
+                      <label>Data de vencimento:</label>
+                      <input type="text" name="due_date" maxlength="5" required>
+                      <button type="submit" class="site-btn">Cadastrar cartão</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+      <div class="class__video set-bg" data-setbg="/img/card.png" style="margin-top: 50px"></div>
+  </div>
+</section>
+<!-- Class Section End -->  
+@endsection

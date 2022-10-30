@@ -50,10 +50,13 @@ Route.get('/produto/atualizar/:id', "ProductController.updateProductView").as("u
 Route.post('/updateProduct', "ProductController.updateProduct").as("updateProduct");
 Route.get('/shop', "ProductController.shop").as("shop")
 Route.get('/produto/:id', "ProductController.productDetails").as("productDetails")
-Route.get('/checkout', "ProductController.checkout").as("checkout")
 
+Route.get('/checkout', "OrderController.checkout").as("checkout")
 Route.post('/createOrder', "OrderController.createOrder").as("createOrder")
 Route.get('/meus-pedidos', "OrderController.userOrders").as("orders")
 Route.get('/pedido/:id', "OrderController.orderView").as("orderView")
+
+Route.get('/cadastrar-cartao', 'CardController.registerCardView').as('registerCardView');
+Route.post('/registerCard', 'CardController.registerCard').as('registerCard');
 
 

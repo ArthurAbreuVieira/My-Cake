@@ -52,6 +52,8 @@ export default class UserController {
     if(!await UserController.checkLogin(auth)) 
       return response.redirect().toRoute("loginView");
 
+    await auth.use('web').user?.load('cards');
+
     return view.render("profile");
   }
 

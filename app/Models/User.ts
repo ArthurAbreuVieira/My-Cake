@@ -1,5 +1,6 @@
 // import { DateTime } from 'luxon'
 import { BaseModel, column, HasMany, hasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import Card from './Card'
 import Product from './Product'
 
 export default class User extends BaseModel {
@@ -25,4 +26,9 @@ export default class User extends BaseModel {
     pivotTable: "orders"
   })
   public products: ManyToMany<typeof Product>
+
+  @hasMany(() => Card,{
+    foreignKey: 'user_id'
+  })
+  public cards: HasMany<typeof Card>
 }

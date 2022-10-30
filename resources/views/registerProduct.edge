@@ -11,8 +11,11 @@
                       <h2>Cadastrar Produto</h2>
                   </div>
                   <form action="{{ route('registerProduct') }}" method="POST">
+                      <label>Nome:</label>
                       <input type="text" placeholder="Nome do produto" name="name" required>
+                      <label>Descrição:</label>
                       <textarea placeholder="Descrição do produto" name="description" required style="width:100%;border:1px solid #0002;resize:none;padding:10px 20px;color:#000"></textarea>
+                      <label>Preço:</label>
                       <input type="text" placeholder="R$00,00" name="value" required>
                       <button type="submit" class="site-btn">Cadastrar Produto</button>
                   </form>

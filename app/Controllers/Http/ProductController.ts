@@ -35,7 +35,7 @@ export default class ProductController {
     return view.render("updateProduct", { product });
   }
   
-  public async updateProduct({ request, response, params, view, auth }: HttpContextContract) {
+  public async updateProduct({ request, response, auth }: HttpContextContract) {
     if(!await UserController.checkLogin(auth)) return response.redirect().toRoute("loginView");
 
     const { id, name, description, value } = request.only(['id','name', 'description','value']);
@@ -53,7 +53,7 @@ export default class ProductController {
     return response.redirect().toRoute("products");
   }
 
-  public async shop({ response, view }) {
+  public async shop({ view }) {
     const products = await Product.all();
 
     return view.render('shop', {products});
@@ -65,20 +65,6 @@ export default class ProductController {
     if(!product) return response.redirect().toRoute('products');
 
     return view.render('productDetails', {product});
-  }
-
-  public async checkout({ request, params, response, view, auth }: HttpContextContract) {
-    if(!await UserController.checkLogin(auth)) return response.redirect().toRoute("loginView");
-    
-    const { product: productId, quantity } = request.qs();
-
-    if(!productId) return response.redirect().toRoute("shop");
-
-    const product = await Product.find(productId);
-
-    if(!product) return response.redirect().toRoute("shop");
-
-    return view.render("checkout", {product, quantity});
   }
 
 }

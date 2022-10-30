@@ -14,15 +14,21 @@
     </div>
     <!-- Breadcrumb End -->
 
-    <!-- Checkout Section Begin -->
+        <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">
+          @if(flashMessages.has('error'))
+            <div class="alert alert-warning" role="alert">
+              {{flashMessages.get('error')}}
+            </div>
+          @endif
+
             <div class="checkout__form">
                 <form action="{{ route('createOrder') }}" method="POST">
                   <input type="hidden" name="product_id" value="{{product.id}}">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
-                            <h6 class="checkout__title">Dados de pagamento</h6>
+                            <h6 class="checkout__title">Dados do comprador</h6>
                             <div class="checkout__input">
                               <p>Nome<span></span></p>
                                 <input type="text" value="{{auth.user.name}}" disabled>
@@ -39,6 +45,28 @@
                                 <p>Endereço<span>*</span></p>
                                 <input type="text" placeholder="Endereço completo" class="checkout__input__add" required name="address">
                             </div>
+                            <br>
+                            <h6 class="checkout__title">Dados de pagamento</h6>
+                            @if(auth.user.cards[0])
+                            <div class="checkout__input">
+                              <p>Selecionar cartão<span>*</span></p>
+                              <select name="card_id">
+                                @each(card in auth.user.cards)
+                                  <option value="{{card.id}}">{{card.name}} - {{card.number}}</option>
+                                @endeach
+                              </select>
+                            </div>
+                            <br><br><br>
+                            <div class="checkout__input">
+                              <p>CVV / CVC:</p>
+                              <input type="text" name="cvc" maxlength="3" required>
+                              <p>Data de vencimento:</p>  
+                              <input type="text" name="due_date" class="checkout__input__add" maxlength="5" required>
+                            </div>
+                            @else 
+                            <p>Você precisa cadastrar um cartão para fazer uma compra</p>
+                            <a href="{{route('registerCardView')}}" class="site-btn">Cadastrar cartão</a>
+                            @endif
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
@@ -52,7 +80,11 @@
                                     <li>Valor unitário <span>R$ {{product.value}}</span></li>
                                     <li>Total <span>R$ {{product.value*quantity}}</span></li>
                                 </ul>
+                                @if(auth.user.cards[0])
                                 <button type="submit" class="site-btn">Finalizar pedido</button>
+                                @else
+                                <a href="{{route('registerCardView')}}" class="site-btn" style="text-align:center">Cadastrar cartão</a>
+                                @endif
                             </div>
                         </div>
                     </div>

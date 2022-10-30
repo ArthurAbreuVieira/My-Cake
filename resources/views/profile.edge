@@ -33,19 +33,19 @@
                         </ul>
                     </div>
                     <div class="product__details__text">
-                        <div class="product__label my-2">Dados de pagamento</div>
+                        <div class="product__label my-2">Cartões de pagamento</div>
                         <ul>
-                            <li>Nome: <span>Arthur Abreu Vieira Mendes</span></li>
-                            <li>Número: <span>8905 6548 9875 1236</span></li>
-                            <li>CVC: <span>895</span></li>
-                            <li>Válidade: <span>12/27</span></li>
-                            <hr>
-                            <li>Nome: <span>Arthur Abreu Vieira Mendes</span></li>
-                            <li>Número: <span>8905 6548 9875 1236</span></li>
-                            <li>CVC: <span>895</span></li>
-                            <li>Válidade: <span>12/27</span></li>
-                            <hr>
-                        </ul>
+                          @each(card in auth.user.cards)
+                          <li>Apelido do cartão: <span>{{card.name}}</span></li>
+                          <li>Titular: <span>{{card.holder}}</span></li>
+                          <li>Número: <span>{{card.number}}</span></li>
+                          <li>CVC: <span>{{card.cvc}}</span></li>
+                          <li>Válidade: <span>{{card.due_date}}</span></li>
+                          <hr>
+                          @endeach
+                      </ul>
+                      <a href="{{route('registerCardView')}}" style="color:#f08632;font-weight:bold">Cadastrar novo cartão</a>
+                      <br><br>
                     </div>
                 </div>
             </div>

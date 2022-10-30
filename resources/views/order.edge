@@ -16,18 +16,29 @@
             <div class="checkout__form">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
-                            <h6 class="checkout__title">Dados de pagamento</h6>
+                            <h6 class="checkout__title">Dados do comprador</h6>
                             <div class="checkout__input">
-                              <p>Nome<span></span></p>
+                              <p>Nome</p>
                                 <input type="text" value="{{auth.user.name}}" disabled>
                             </div>
                             <div class="checkout__input">
-                              <p>Email<span>*</span></p>
+                              <p>Email</p>
                               <input type="text" value="{{auth.user.email}}" disabled>
                             </div>
                             <div class="checkout__input">
-                                <p>Endereço<span>*</span></p>
+                                <p>Endereço</p>
                                 <input type="text" placeholder="Endereço completo" class="checkout__input__add"  disabled value="{{order.address}}">
+                            </div>
+                            <h6 class="checkout__title">Dados de pagamento</h6>
+                            <div class="checkout__input">
+                              <p>Cartão</p>
+                              <input type="text" name="cvc" maxlength="3" required disabled value="{{order.card.name}} - {{order.card.number}}">
+                            </div>
+                            <div class="checkout__input">
+                              <p>CVV / CVC:</p>
+                              <input type="text" name="cvc" maxlength="3" required disabled value="{{order.card.cvc}}">
+                              <p>Data de vencimento:</p>  
+                              <input type="text" name="due_date" class="checkout__input__add" maxlength="5" \required disabled value="{{order.card.due_date}}">
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
