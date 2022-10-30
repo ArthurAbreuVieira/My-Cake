@@ -1,0 +1,61 @@
+@layout('layouts/base')
+
+@section('content')
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__text">
+                        <h2>Produtos</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Wishlist Section Begin -->
+    <section class="wishlist spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="wishlist__cart__table">
+                      @if(products[0])
+                        <table class="table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Valor</th>
+                                    <th><a href="{{ route('registerProductView') }}" class="primary-btn" style="text-align:center">Cadastrar produto</a></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @each(product in products)
+                                <tr>
+                                  <td class="product__cart__item">
+                                    <div class="product__cart__item__text">
+                                      <h6>{{ product.name }}</h6>
+                                    </div>
+                                  </td>
+                                  <td>R$ {{ product.value }}</td>
+                                  <td class="cart__btn" align="right">
+                                    <a href="{{ route('updateProductView', [product.id]) }}" class="btn btn-warning px-4" >Editar</a>
+                                  </td>
+                                </tr>
+                                @endeach                                
+                            </tbody>
+                        </table>
+                        @else
+                          <p>Ainda existem produtos cadastrados</p>
+                          <a href="{{ route('registerProductView') }}" class="primary-btn" style="text-align:center">Cadastrar produto</a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Wishlist Section End -->
+
+@endsection

@@ -1,0 +1,55 @@
+@layout('layouts/base')
+@section('content')
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+          <div class="breadcrumb__text">
+            <h2>Pedido #{{ order.id }}{{order.product_id}}{{order.quantity}}-{{String(order.order_date).substring(0,10)}}</h2>
+        </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Checkout Section Begin -->
+    <section class="checkout spad">
+        <div class="container">
+            <div class="checkout__form">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6">
+                            <h6 class="checkout__title">Dados de pagamento</h6>
+                            <div class="checkout__input">
+                              <p>Nome<span></span></p>
+                                <input type="text" value="{{auth.user.name}}" disabled>
+                            </div>
+                            <div class="checkout__input">
+                              <p>Email<span>*</span></p>
+                              <input type="text" value="{{auth.user.email}}" disabled>
+                            </div>
+                            <div class="checkout__input">
+                                <p>Endereço<span>*</span></p>
+                                <input type="text" placeholder="Endereço completo" class="checkout__input__add"  disabled value="{{order.address}}">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="checkout__order">
+                                <h6 class="order__title">Seu pedido</h6>
+                                <div class="checkout__order__products">Produto <span>Quantidade</span></div>
+                                <ul class="checkout__total__products">
+                                    <li>{{order.product.name}} <span>{{order.quantity}}</span></li>
+                                </ul>
+                                <ul class="checkout__total__all">
+                                    <li>Valor unitário <span>R$ {{order.product.value}}</span></li>
+                                    <li>Total <span>R$ {{order.product.value*order.quantity}}</span></li>
+                                </ul>
+                                <ul class="checkout__total__all" style="border-top: none">
+                                    <li>Data <span>{{String(order.order_date).substring(0,10)}}</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </section>
+    <!-- Checkout Section End -->
+
+@endsection

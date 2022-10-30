@@ -1,0 +1,31 @@
+@layout('layouts/base')
+
+@section('content')
+<section class="class spad">
+  <div class="container">
+      <div class="row">  
+          <div class="col-lg-6">
+              <div class="class__form">
+                  <div class="section-title">
+                      <span>Atualizar dados</span>
+                      <h2>Atualizar dados do produto</h2>
+                  </div>
+                  <form action="{{ route('updateProduct') }}" method="POST">
+                      <input type="hidden" name="id" value="{{product.id }}"/>
+                      <label>Nome:</label>
+                      <input type="text" placeholder="Nome do produto" name="name" required value="{{product.name}}">
+                      <label>Descrição:</label>
+                      <textarea placeholder="Descrição do produto" name="description" required style="width:100%;border:1px solid #0002;resize:none;padding:10px 20px;color:#000;">{{product.description}}</textarea>
+                      <label>Preço:</label>
+                      <input type="text" placeholder="R$00,00" name="value" value="{{product.value}}" required>
+                      <button type="submit" class="site-btn">Atualizar</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+      <div class="class__video set-bg" data-setbg="/img/class-video.jpg" style="margin-top: 50px">
+      </div>
+  </div>
+</section>
+<!-- Class Section End -->  
+@endsection

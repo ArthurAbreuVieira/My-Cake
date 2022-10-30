@@ -1,0 +1,54 @@
+@layout('layouts/base')
+
+@section('content')
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="breadcrumb__text">
+                        <h2>Detalhes do produto</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Shop Details Section Begin -->
+    <section class="product-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                  <div class="product__details__img" style="padding: 0">
+                      <img class="" src="../img/shop/product-{{product.id%12}}.jpg" alt="" style="width: 100%;">
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-5">
+                    <div class="product__details__text">
+                        <div class="product__label">Cupcake</div>
+                        <h4>{{product.name}}</h4>
+                        <h5>R$ {{product.value}}</h5>
+                        <h5 style="border:none; padding-bottom:0">Descrição: </h5>
+                        <p>{{product.description}}</p>
+                        <br><br><br>
+                        <form action="{{route('checkout')}}" method="GET">
+                          <input type="hidden" value="{{product.id}}" name="product">
+                          <div class="product__details__option">
+                              <div class="quantity">
+                                  <div class="pro-qty">
+                                      <input type="number" value="1" name="quantity">
+                                  </div>
+                              </div>
+                              <input type="submit" class="primary-btn" value="Comprar" />
+                          </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shop Details Section End -->
+
+
+@endsection
