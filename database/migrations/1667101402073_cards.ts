@@ -6,12 +6,12 @@ export default class extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('user_id').unsigned().references('users.id')
-      table.string('holder')
-      table.string('name')
-      table.string('number').unique()
-      table.string('cvc')
-      table.string('due_date')
+      table.integer('user_id').unsigned().references('users.id').notNullable()
+      table.string('holder').notNullable()
+      table.string('name').notNullable()
+      table.string('number').unique().notNullable()
+      table.string('cvc', 3).notNullable()
+      table.string('due_date', 5).notNullable()
     })
   }
 

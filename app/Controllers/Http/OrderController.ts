@@ -59,13 +59,13 @@ export default class OrderController {
     return view.render("orders", {orders});
   }
 
-  public async orderView({ params, auth, response, view }) {
+  public async orderView({ params, auth, response, view }: HttpContextContract) {
     if(!await UserController.checkLogin(auth)) return response.redirect().toRoute("loginView");
 
     
     const order = await Order.find(params.id);
 
-    if(!order || order.user_id !== auth.use('web').user.id) 
+    if(!order || order.user_id !== auth.use('web')?.user?.id) 
       return response.redirect().toRoute("orders");
     
     await order.load('product');
