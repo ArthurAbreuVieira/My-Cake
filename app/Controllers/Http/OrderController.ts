@@ -30,8 +30,6 @@ export default class OrderController {
     });
 
     const card = auth.use('web')?.user?.cards[0];
-
-    // console.log(card);
     
 
     if(card?.cvc !== cvc || card?.due_date !== due_date) {
@@ -51,12 +49,12 @@ export default class OrderController {
     return response.redirect().toRoute('orders');
   }
 
-  public async userOrders({ auth, response, view }) {
+  public async userOrders({ auth, response, view }: HttpContextContract) {
     if(!await UserController.checkLogin(auth)) return response.redirect().toRoute("loginView");
 
-    const userId = auth.use('web').user.id;
+    const userId = auth.use('web')?.user?.id;
 
-    const orders = await Order.query().where('user_id', userId)
+    const orders = await Order.query().where('user_id', userId as number)
     
     return view.render("orders", {orders});
   }
@@ -72,8 +70,6 @@ export default class OrderController {
     
     await order.load('product');
     await order.load('card');
-
-    console.log(order);
     
 
     return view.render("order", {order});

@@ -22,10 +22,10 @@ export default class User extends BaseModel {
   @column()
   public cpf: string;
 
-  @manyToMany(() => Product, {
-    pivotTable: "orders"
-  })
-  public products: ManyToMany<typeof Product>
+  // @manyToMany(() => Product, {
+  //   pivotTable: "orders"
+  // })
+  // public products: ManyToMany<typeof Product>
 
   @hasMany(() => Card,{
     foreignKey: 'user_id'
